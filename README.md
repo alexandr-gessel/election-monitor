@@ -1,5 +1,6 @@
 # 📊 Election Predictions API
 
+
 A **FastAPI** application providing probabilistic predictions for the **2024 U.S. Presidential and Senate elections** by state.  
 The data is sourced from CSV files for real-time and historical analysis.
 
@@ -24,3 +25,34 @@ uvicorn app.main:app --reload
 |--------------------------------------|--------|-------------------------|-------|
 | `sample_data/president_sample.csv`   | CSV    | All rows from 50 states | Columns: Democratic, Donald Trump, Other |
 | `sample_data/senate/` (33 files)     | CSV    | Full volume             | One file per state. Wide format, candidate names vary |
+
+
+A **FastAPI** application providing probabilistic predictions for the **2024 U.S. Presidential and Senate elections** by state.  
+The data is sourced from CSV files for real-time and historical analysis.
+
+---
+
+## 📦 Project Structure
+
+- **`sample_data/`**:  
+  Contains CSV data for presidential and senate races:
+  
+  | File/Folder                         | Format | Rows                   | Notes |
+  |-------------------------------------|--------|-------------------------|-------|
+  | `sample_data/president_sample.csv`  | CSV    | All rows from 50 states | Columns: Democratic, Donald Trump, Other |
+  | `sample_data/senate/` (33 files)    | CSV    | Full volume             | One file per state; wide format, candidate names vary |
+
+- **`ingest/loader.py`**:  
+  Data loader module for ingesting CSV files.
+
+- **`app/`**:  
+  FastAPI application:
+  - `models.py`: Pydantic models for data serialization
+  - `main.py`: API endpoints for data retrieval
+
+---
+
+## 🚀 How to Run
+
+```bash
+uvicorn app.main:app --reload
