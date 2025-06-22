@@ -2,7 +2,7 @@
 from pydantic import BaseModel
 from datetime import datetime
 
-class PresidentPrediction(BaseModel):
+class PresidentPredictionCreate(BaseModel):
 	
 	date : datetime
 	timestamp : int
@@ -13,7 +13,7 @@ class PresidentPrediction(BaseModel):
 	
 
 
-class SenatePrediction(BaseModel):
+class SenatePredictionCreate(BaseModel):
 	date : datetime
 	timestamp : int
 	candidate_1 : float

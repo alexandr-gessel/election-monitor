@@ -1,34 +1,63 @@
 # app/main.py
-from fastapi import FastAPI
+from fastapi import FastAPI, Depends, HTTPException
 from typing import List
-from app.models import PresidentPrediction, SenatePrediction
-from ingest.loader  import load_data_prediction, load_data_senate
+from app.models import PresidentPredictionCreate, SenatePredictionCreate
+from sqlalchemy.ext.asyncio import AsyncSession
+from sqlalchemy import select
+from app.db.session import PresidentPredictionDB, SenatePredictionDB
+from app.db.engine import get_session
+
 
 app = FastAPI()
 
+
+@app.post("/president/")
+async def create_president_prediction(
+    prediction: PresidentPredictionCreate,
+    session: AsyncSession = Depends(get_session)
+):
+    new_prediction = PresidentPredictionDB(**prediction.model_dump())
+
+    session.add(new_prediction)
+    await session.commit()
+    await session.refresh(new_prediction)
+
+    return new_prediction
+
+
 @app.get("/president/{state}")
-def get_president_predictions(state_code: str) -> List[PresidentPrediction]:
-	try:
-		state_predictions = []
-		predictions = load_data_prediction()
-	
-		for week_prediction in predictions:
-			if week_prediction.state == state_code:
-				state_predictions.append(week_prediction)
+async def get_president_predictions(state: str, session: AsyncSession = Depends(get_session)):
+    query = select(PresidentPredictionDB).where(PresidentPredictionDB.state == state)
+    result = await session.execute(query)
+    predictions = result.scalars().all()
 
-		if not state_predictions:
-			raise HTTPException(status_code=404, detail=f"No data for state {state}")
-
-		return state_predictions
-	except Exception as e:
-		raise HTTPException(status_code=500, detail=str(e))
+    if not predictions:
+        raise HTTPException(status_code=404, detail=f"No predictions found for state {state}")
+    
+    return predictions
 
 
-@app.get("/senate/{state_code}")
-def get_senate_predictions(state_code: str):
-	try:
-		return load_data_senate(state_code)
-	except FileNotFoundError:
-		raise HTTPException(status_code=404, detail=f"Keine Senatsdaten für den Staat {state_code}")
-	except Exception as e:
-		raise HTTPException(status_code=500, detail=str(e))
+@app.post("/senate/")
+async def create_senate_prediction(
+    prediction: SenatePredictionCreate,
+    session: AsyncSession = Depends(get_session)
+):
+    new_prediction = SenatePredictionDB(**prediction.model_dump())
+
+    session.add(new_prediction)
+    await session.commit()
+    await session.refresh(new_prediction)
+
+    return new_prediction
+
+
+@app.get("/senate/{state}")
+async def get_senate_predictions(state: str, session: AsyncSession = Depends(get_session)):
+    query = select(SenatePredictionDB).where(SenatePredictionDB.state == state)
+    result = await session.execute(query)
+    predictions = result.scalars().all()
+
+    if not predictions:
+        raise HTTPException(status_code=404, detail=f"No predictions found for state {state}")
+    
+    return predictions

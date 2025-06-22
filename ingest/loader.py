@@ -3,9 +3,9 @@ import csv
 from datetime import datetime
 from pathlib import Path 
 from typing import List
-from app.models import PresidentPrediction, SenatePrediction
+from app.models import PresidentPredictionCreate, SenatePredictionCreate
 
-def load_data_prediction() -> List[PresidentPrediction]:
+def load_data_prediction() -> List[PresidentPredictionCreate]:
     predictions = []
     csv_path = Path().parent.parent / 'sample_data' / 'president_sample.csv'
 
@@ -15,7 +15,7 @@ def load_data_prediction() -> List[PresidentPrediction]:
         
         for row in reader:
             
-            prediction = PresidentPrediction(
+            prediction = PresidentPredictionCreate(
                 date = datetime.strptime(row['Date (UTC)'], "%m-%d-%Y %H:%M" ),
                 timestamp=int(row['Timestamp (UTC)']),
                 democratic=float(row['Democratic']),
@@ -31,7 +31,7 @@ def load_data_prediction() -> List[PresidentPrediction]:
     	#predictions = load_data_prediction()
 
 
-def load_data_senate(state_code: str) -> List[SenatePrediction]:
+def load_data_senate(state_code: str) -> List[SenatePredictionCreate]:
 	predictions = []
 
 	csv_path = Path().parent.parent / 'sample_data' / 'senate' / f"{state_code}.csv"
@@ -55,7 +55,7 @@ def load_data_senate(state_code: str) -> List[SenatePrediction]:
 		candidate_1_name, candidate_2_name = candidate_columns
 
 		for row in reader:
-			prediction = SenatePrediction(
+			prediction = SenatePredictionCreate(
 				date=datetime.strptime(row['Date (UTC)'], "%m-%d-%Y %H:%M"),
                 timestamp=int(row['Timestamp (UTC)']),
                 candidate_1=float(row[candidate_1_name]),
