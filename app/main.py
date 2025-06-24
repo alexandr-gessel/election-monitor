@@ -1,14 +1,73 @@
 # app/main.py
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Request, Path
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
 from typing import List
 from app.models import PresidentPredictionCreate, SenatePredictionCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
 from app.db.session import PresidentPredictionDB, SenatePredictionDB
 from app.db.engine import get_session
-
+from app.data.states import states
+import os
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="app/static"), name="static")
+templates = Jinja2Templates(directory="app/templates")
+
+@app.get("/")
+def index(request: Request):
+    
+    available_files = set(os.listdir("app/static/charts"))
+
+    both = []
+    pres_only = []
+    sen_only = []
+
+    for code, name in states:
+        pres = f"{code}_president.png" in available_files
+        sen = f"{code}_senate.png" in available_files
+
+        if pres and sen:
+            both.append((code, name))
+        elif pres:
+            pres_only.append((code, name))
+        elif sen:
+            sen_only.append((code, name))
+
+    sorted_states = both + pres_only + sen_only
+
+    return templates.TemplateResponse("index.html", {"request": request, "states": sorted_states})
+
+@app.get("/about.html")
+async def get_about(request: Request):
+    return templates.TemplateResponse("about.html", {"request": request})
+
+
+@app.get("/state/{state}")
+async def state_page(
+    request: Request,
+    state: str = Path(..., min_length=2, max_length=2),
+    session: AsyncSession = Depends(get_session)
+):
+    # Presiden
+    pres_query = select(PresidentPredictionDB).where(PresidentPredictionDB.state == state)
+    pres_result = await session.execute(pres_query)
+    pres_data = pres_result.scalars().all()
+
+    # Senate
+    sen_query = select(SenatePredictionDB).where(SenatePredictionDB.state == state)
+    sen_result = await session.execute(sen_query)
+    sen_data = sen_result.scalars().all()
+
+    return templates.TemplateResponse("state.html", {
+        "request": request,
+        "state": state,
+        "pres_data": pres_data,
+        "sen_data": sen_data,
+         "states": states
+    })
 
 
 @app.post("/president/")

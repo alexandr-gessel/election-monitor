@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  
+  db:
+    image: postgres:15
+    container_name: postgres-election
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 12345
+      POSTGRES_DB: election
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build:
+      context: .
+      args:
+        DATABASE_URL: ${DATABASE_URL}
+    container_name: election-api
+    restart: always
+    depends_on:
+      - db
+    env_file:
+      - .env
+    ports:
+      - "8000:8000"
+
+volumes:
+  pgdata:

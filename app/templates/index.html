@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Election Monitor API – US-Wahlen 2024</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="/static/style.css" rel="stylesheet" type="text/css">
+</head>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-6xl mx-auto">
+  <!-- Kopfzeile mit Projektlink -->
+  <header class="bg-gray-900 text-white">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-xl font-semibold">Trump vs. Harris – Woche für Woche</h1>
+      <a href="/about.html" class="text-sm hover:underline">Was ist das?</a>
+    </div>
+  </header>
+
+  <!-- Heatmap -->
+  <main class="max-w-5xl mx-auto px-4 py-8">
+    <div class="mb-10">
+      <img src="/static/charts/main.png" alt="Heatmap" class="rounded shadow w-full">
+    </div>
+
+    <!-- Gruppenübersicht horizontal -->
+    <section class="mb-10">
+
+      <div class="flex flex-wrap justify-center gap-12 text-sm">
+        <div>
+          <h3 class="font-medium mb-2 text-center">🟨 Swing States</h3>
+          <ul class="space-y-1 text-center">
+            <li><a href="/state/MI" class="text-blue-600 hover:underline">Michigan</a></li>
+            <li><a href="/state/NV" class="text-blue-600 hover:underline">Nevada</a></li>
+            <li><a href="/state/PA" class="text-blue-600 hover:underline">Pennsylvania</a></li>
+            <li><a href="/state/WI" class="text-blue-600 hover:underline">Wisconsin</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-medium mb-2 text-center">🟦 Demokratisch</h3>
+          <ul class="space-y-1 text-center">
+            <li><a href="/state/CA" class="text-blue-600 hover:underline">California</a></li>
+            <li><a href="/state/NY" class="text-blue-600 hover:underline">New York</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-medium mb-2 text-center">🟥 Republikanisch</h3>
+          <ul class="space-y-1 text-center">
+            <li><a href="/state/TX" class="text-blue-600 hover:underline">Texas</a></li>
+            <li><a href="/state/FL" class="text-blue-600 hover:underline">Florida</a></li>
+         
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Dropdown für alle Staaten -->
+    <section class="mt-8 mb-16 text-center">
+      <label for="state-select" class="block mb-2 text-sm font-medium text-gray-700">Alle Staaten</label>
+      <select id="state-select" name="state-select"
+        class="w-full max-w-xs p-2 border border-gray-300 rounded"
+        onchange="if(this.value) window.location.href='/state/' + this.value">
+        <option value="">– Bundesstaat auswählen –</option>
+        {% for abbr, name in states %}
+          <option value="{{ abbr }}">{{ name }}</option>
+        {% endfor %}
+      </select>
+    </section>
+  </main>
+  </div>
+</body>
+</html>

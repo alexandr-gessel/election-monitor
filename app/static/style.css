@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: system-ui, sans-serif;
+    background-color: #f4f4f4;
+    color: #1e293b;
+}
+
+header {
+    background-color: #1e293b;
+    padding: 12px 24px;
+}
+
+.logo {
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.logo a {
+    color: white;
+    text-decoration: none;
+}
+
+.main-layout {
+    display: flex;
+    flex-direction: row;
+    padding: 24px;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.main-image img {
+    max-width: 600px;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 6px;
+}
+
+.sidebar {
+    min-width: 200px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    margin-bottom: 8px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: #1d4ed8; /* синий — демократы */
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+.main-centered {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px;
+    text-align: center;
+}
+
+.chart-block {
+    margin-bottom: 48px;
+}
+
+.chart-block img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    border-radius: 6px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.chart-block h3 {
+    color: #dc2626; /* красный — республиканцы */
+    margin-bottom: 12px;
+}
+
+p {
+    font-size: 16px;
+    color: #334155;
+}

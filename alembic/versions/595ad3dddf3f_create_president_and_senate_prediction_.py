@@ -42,8 +42,8 @@ def upgrade() -> None:
     sa.Column('state', sa.String(length=50), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
-    op.drop_table('election_2024_day')
-    op.drop_table('state')
+    #op.drop_table('election_2024_day')
+    #op.drop_table('state')
     # ### end Alembic commands ###
 
 
