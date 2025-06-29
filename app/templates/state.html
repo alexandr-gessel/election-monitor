@@ -23,7 +23,7 @@
             <h3 class="pres-title" >Präsidentenwahl</h3>
             {% if pres_data %}
             <a href="{{ url_for('static', path='charts/' + state + '_president.png') }}" target="_blank">
-                <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="rounded shadow mx-auto mb-6" style="width: 100%; max-width: 800px;">
+                <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="chart-img">
 
             </a>
             {% else %}
@@ -35,7 +35,7 @@
             <h3 class="senate-title" >Senatswahl</h3>
             {% if sen_data %}
             <a href="{{ url_for('static', path='charts/' + state + '_senate.png') }}" target="_blank">
-                <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="rounded shadow w-full max-w-5xl mx-auto" style="width: 100%; max-width: 800px;">
+                <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="chart-img">
             </a>
             {% else %}
                 <p>Für diesen Staat liegen keine Daten zur Senatswahl vor.</p>
