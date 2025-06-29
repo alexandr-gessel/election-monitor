@@ -24,7 +24,7 @@
             {% if pres_data %}
             <div class="chart-wrapper">
             <a href="{{ url_for('static', path='charts/' + state + '_president.png') }}" target="_blank">
-                <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="chart-img">
+                <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="mb-10">
 
             </a>
             </div>
@@ -39,7 +39,7 @@
             {% if sen_data %}
              <div class="chart-wrapper">
             <a href="{{ url_for('static', path='charts/' + state + '_senate.png') }}" target="_blank">
-                <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="chart-img">
+                <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="mb-10">
             </a>
             </div>
             {% else %}
