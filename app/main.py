@@ -61,9 +61,9 @@ async def state_page(
 
     # Senate
     try:
-    sen_query = select(SenatePredictionDB).where(SenatePredictionDB.state == state)
-    sen_result = await session.execute(sen_query)
-    sen_data = sen_result.scalars().all()
+        sen_query = select(SenatePredictionDB).where(SenatePredictionDB.state == state)
+        sen_result = await session.execute(sen_query)
+        sen_data = sen_result.scalars().all()
     except SQLAlchemyError:
         pres_data = []
     
