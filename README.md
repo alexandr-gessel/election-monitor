@@ -33,7 +33,6 @@ core-utils/
 │   └── plot_main_heatmap.py
 ├── sample_data/
 │   └── president_sample.csv, senate_combined.json
-├── start.sh                 # Optional bootstrap
 ├── Dockerfile
 ├── docker-compose.yml
 └── requirements.txt
