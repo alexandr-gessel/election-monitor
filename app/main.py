@@ -6,6 +6,7 @@ from typing import List
 from app.models import PresidentPredictionCreate, SenatePredictionCreate
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import select
+from sqlalchemy.exc import SQLAlchemyError
 from app.db.session import PresidentPredictionDB, SenatePredictionDB
 from app.db.engine import get_session
 from app.data.states import states
