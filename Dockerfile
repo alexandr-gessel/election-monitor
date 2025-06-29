@@ -4,23 +4,18 @@ FROM python:3.12-slim
 # app folder
 WORKDIR /app
 
-# copy requirements
+# copy requirements and install
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# copy app
-COPY alembic.ini .
+# copy everything else
 COPY . .
 
-# copy and start
-COPY start.sh .
-RUN chmod +x start.sh
-
-# env
+# environment
 ENV PYTHONUNBUFFERED=1
 
-# port
+# expose port
 EXPOSE 8000
 
-# run server
-CMD ["./start.sh"]
+# run FastAPI server
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
