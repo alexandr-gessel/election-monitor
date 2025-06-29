@@ -12,7 +12,20 @@ The original system aggregated data from **Polymarket**, media sources, and NLP 
 This stripped-down version includes only cleaned prediction market data and public-facing graphs.
 
 🔗 For more background, see the [project description](https://pythia.one/us_wahl_2024.html)  
-🌐 **Live demo:** _coming soon_ → `https://your-url-here.com` *(insert after deploy)*
+🌐 **Live demo:** [https://election-monitor.up.railway.app](https://election-monitor.up.railway.app)
+
+---
+
+## 🧾 Hinweis zur Datenbank
+
+Ursprünglich wurde die API mit einer vollständigen PostgreSQL-Datenbank, Alembic und SQLAlchemy betrieben, 
+um Prognosedaten zu erfassen und zu aggregieren. Nach mehreren Iterationen mit HTML-Templates und Visualisierungen 
+wurde die Datenbank jedoch aus dem Deployment entfernt.
+
+Das Projekt läuft nun **ohne aktive Datenbank** – alle Diagramme wurden einmalig manuell generiert und als PNG gespeichert.  
+FastAPI wird weiterhin in einem Docker-Container (über Railway) ausgeführt, verarbeitet jedoch keine Datenbankabfragen mehr.  
+Die Abhängigkeiten von Alembic, SQLAlchemy und asyncpg sind noch vorhanden, werden jedoch nicht mehr verwendet.
+
 
 ---
 
