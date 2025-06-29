@@ -66,7 +66,7 @@ async def state_page(
         sen_result = await session.execute(sen_query)
         sen_data = sen_result.scalars().all()
     except SQLAlchemyError:
-        pres_data = []
+        sen_data = []
     
     return templates.TemplateResponse("state.html", {
         "request": request,
