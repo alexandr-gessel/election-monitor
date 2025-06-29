@@ -6,6 +6,12 @@
   <title>{{ state }}</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="/static/style.css" rel="stylesheet" type="text/css">
+  <link rel="icon" href="{{ url_for('static', path='favicon.ico') }}" type="image/x-icon">
+  <meta property="og:title" content="Election Monitor – US-Wahlen 2024">
+  <meta property="og:description" content="Visualisierung von Prognosedaten zur Präsidentschafts- und Senatswahl 2024 in den USA.">
+  <meta property="og:image" content="https://election-monitor.up.railway.app/static/charts/main.png">
+  <meta property="og:url" content="https://election-monitor.up.railway.app">
+  <meta property="og:type" content="website">
 </head>
 <body class="bg-gray-100 text-gray-800">
   <div class="max-w-6xl mx-auto">
