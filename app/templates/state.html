@@ -1,51 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <title> {{ state }} </title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ state }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="/static/style.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-    <header>
-        <div class="logo"><a href="/">← Election Monitor API</a></div>
-    </header>
+<body class="bg-gray-100 text-gray-800">
+  <div class="max-w-6xl mx-auto">
 
-    <main class="main-centered">
-        {% set full_name = dict(states).get(state, state) %}
-        <h2>{{ full_name }}</h2>
-        <p style="font-size: 14px; color: #64748b; margin-bottom: 24px;">
-            Klicken Sie auf die Grafiken, um sie in voller Größe zu sehen.
-        </p>
-        <br>
-        <div class="chart-block">
-            <h3 class="pres-title" >Präsidentenwahl</h3>
-            {% if pres_data %}
-            <div class="chart-wrapper">
-            <a href="{{ url_for('static', path='charts/' + state + '_president.png') }}" target="_blank">
-                <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="mb-10">
+  <!-- Kopfzeile -->
+  <header class="bg-gray-900 text-white">
+    <div class="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="/" class="text-xl font-semibold hover:underline">← Election Monitor API</a>
+      <a href="/about.html" class="text-sm hover:underline">Was ist das?</a>
+    </div>
+  </header>
 
-            </a>
-            </div>
+  <!-- Hauptinhalt -->
+  <main class="max-w-5xl mx-auto px-4 py-8 text-center">
+    {% set full_name = dict(states).get(state, state) %}
+    <h2 class="text-2xl font-semibold mb-2">{{ full_name }}</h2>
+    <p class="text-sm text-gray-500 mb-8">Klicken Sie auf die Grafiken, um sie in voller Größe zu sehen.</p>
 
-            {% else %}
-                <p>Für diesen Staat liegen keine Daten zur Präsidentenwahl vor.</p>
-            {% endif %}
-        </div>
+    <!-- Präsidentenwahl -->
+    <div class="mb-12">
+      <h3 class="text-lg font-medium text-red-600 mb-4">Präsidentenwahl</h3>
+      {% if pres_data %}
+        <a href="{{ url_for('static', path='charts/' + state + '_president.png') }}" target="_blank">
+          <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="rounded shadow w-full max-w-4xl mx-auto">
+        </a>
+      {% else %}
+        <p>Für diesen Staat liegen keine Daten zur Präsidentenwahl vor.</p>
+      {% endif %}
+    </div>
 
-        <div class="chart-block" >
-            <h3 class="senate-title" >Senatswahl</h3>
-            {% if sen_data %}
-             <div class="chart-wrapper">
-            <a href="{{ url_for('static', path='charts/' + state + '_senate.png') }}" target="_blank">
-                <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="mb-10">
-            </a>
-            </div>
-            {% else %}
-                <p>Für diesen Staat liegen keine Daten zur Senatswahl vor.</p>
-            {% endif %}
-        </div>
-    </main>
+    <!-- Senatswahl -->
+    <div class="mb-12">
+      <h3 class="text-lg font-medium text-blue-600 mb-4">Senatswahl</h3>
+      {% if sen_data %}
+        <a href="{{ url_for('static', path='charts/' + state + '_senate.png') }}" target="_blank">
+          <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="rounded shadow w-full max-w-4xl mx-auto">
+        </a>
+      {% else %}
+        <p>Für diesen Staat liegen keine Daten zur Senatswahl vor.</p>
+      {% endif %}
+    </div>
+  </main>
+
+  </div>
 </body>
 </html>
