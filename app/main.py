@@ -47,35 +47,21 @@ async def get_about(request: Request):
 
 
 @app.get("/state/{state}")
-async def state_page(
-    request: Request,
-    state: str = Path(..., min_length=2, max_length=2),
-    session: AsyncSession = Depends(get_session)
-):
-    # Presiden
-    try:
-        pres_query = select(PresidentPredictionDB).where(PresidentPredictionDB.state == state)
-        pres_result = await session.execute(pres_query)
-        pres_data = pres_result.scalars().all()
-    except SQLAlchemyError:
-        pres_data = []
+async def state_page(request: Request, state: str = Path(..., min_length=2, max_length=2)):
+    charts_dir = "app/static/charts"
+    pres_path = os.path.join(charts_dir, f"{state}_president.png")
+    sen_path = os.path.join(charts_dir, f"{state}_senate.png")
 
-    # Senate
-    try:
-        sen_query = select(SenatePredictionDB).where(SenatePredictionDB.state == state)
-        sen_result = await session.execute(sen_query)
-        sen_data = sen_result.scalars().all()
-    except SQLAlchemyError:
-        sen_data = []
-    
+    pres_data = os.path.exists(pres_path)
+    sen_data = os.path.exists(sen_path)
+
     return templates.TemplateResponse("state.html", {
         "request": request,
         "state": state,
+        "states": states,
         "pres_data": pres_data,
-        "sen_data": sen_data,
-         "states": states
+        "sen_data": sen_data
     })
-
 
 @app.post("/president/")
 async def create_president_prediction(
