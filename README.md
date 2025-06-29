@@ -28,11 +28,11 @@ core-utils/
 │		└──engine.py 		
 ├── ingest/
 │   ├── load_president.py    # Loads CSV → DB
-│   ├── load_senate.py
+│   ├── load_senate.py       # Loads JSON → DB
 │   ├── generate_all_charts.py
 │   └── plot_main_heatmap.py
 ├── sample_data/
-│   └── president_sample.csv, senate/*.csv
+│   └── president_sample.csv, senate_combined.json
 ├── start.sh                 # Optional bootstrap
 ├── Dockerfile
 ├── docker-compose.yml
