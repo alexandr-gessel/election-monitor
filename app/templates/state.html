@@ -22,10 +22,13 @@
         <div class="chart-block">
             <h3 class="pres-title" >Präsidentenwahl</h3>
             {% if pres_data %}
+            <div class="chart-wrapper">
             <a href="{{ url_for('static', path='charts/' + state + '_president.png') }}" target="_blank">
                 <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="chart-img">
 
             </a>
+            </div>
+
             {% else %}
                 <p>Für diesen Staat liegen keine Daten zur Präsidentenwahl vor.</p>
             {% endif %}
@@ -34,9 +37,11 @@
         <div class="chart-block" >
             <h3 class="senate-title" >Senatswahl</h3>
             {% if sen_data %}
+             <div class="chart-wrapper">
             <a href="{{ url_for('static', path='charts/' + state + '_senate.png') }}" target="_blank">
                 <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="chart-img">
             </a>
+            </div>
             {% else %}
                 <p>Für diesen Staat liegen keine Daten zur Senatswahl vor.</p>
             {% endif %}
