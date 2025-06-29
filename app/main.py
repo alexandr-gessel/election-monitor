@@ -52,15 +52,21 @@ async def state_page(
     session: AsyncSession = Depends(get_session)
 ):
     # Presiden
-    pres_query = select(PresidentPredictionDB).where(PresidentPredictionDB.state == state)
-    pres_result = await session.execute(pres_query)
-    pres_data = pres_result.scalars().all()
+    try:
+        pres_query = select(PresidentPredictionDB).where(PresidentPredictionDB.state == state)
+        pres_result = await session.execute(pres_query)
+        pres_data = pres_result.scalars().all()
+    except SQLAlchemyError:
+        pres_data = []
 
     # Senate
+    try:
     sen_query = select(SenatePredictionDB).where(SenatePredictionDB.state == state)
     sen_result = await session.execute(sen_query)
     sen_data = sen_result.scalars().all()
-
+    except SQLAlchemyError:
+        pres_data = []
+    
     return templates.TemplateResponse("state.html", {
         "request": request,
         "state": state,
