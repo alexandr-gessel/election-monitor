@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title> {{ state }} </title>
-    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='style.css') }}">
+    
 </head>
 <body>
     <header>
@@ -14,20 +15,28 @@
     <main class="main-centered">
         {% set full_name = dict(states).get(state, state) %}
         <h2>{{ full_name }}</h2>
-
+        <p style="font-size: 14px; color: #64748b; margin-bottom: 24px;">
+            Klicken Sie auf die Grafiken, um sie in voller Größe zu sehen.
+        </p>
+        <br>
         <div class="chart-block">
-            <h3>Präsidentenwahl</h3>
+            <h3 class="pres-title" >Präsidentenwahl</h3>
             {% if pres_data %}
-                <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="rounded shadow w-full max-w-6xl mx-auto mb-6">
+            <a href="{{ url_for('static', path='charts/' + state + '_president.png') }}" target="_blank">
+                <img src="{{ url_for('static', path='charts/' + state + '_president.png') }}" alt="Präsidentenwahl" class="rounded shadow mx-auto mb-6" style="width: 110%; max-width: 2000px;">
+
+            <a>
             {% else %}
                 <p>Für diesen Staat liegen keine Daten zur Präsidentenwahl vor.</p>
             {% endif %}
         </div>
 
-        <div class="chart-block">
-            <h3>Senatswahl</h3>
+        <div class="chart-block" >
+            <h3 class="senate-title" >Senatswahl</h3>
             {% if sen_data %}
-                <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="rounded shadow w-full max-w-5xl mx-auto">
+            <a href="{{ url_for('static', path='charts/' + state + '_senate.png') }}" target="_blank">
+                <img src="{{ url_for('static', path='charts/' + state + '_senate.png') }}" alt="Senatswahl" class="rounded shadow w-full max-w-5xl mx-auto" style="width: 110%; max-width: 2000px;">
+            </a>
             {% else %}
                 <p>Für diesen Staat liegen keine Daten zur Senatswahl vor.</p>
             {% endif %}
