@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: system-ui, sans-serif;
-    background-color: #f4f4f4;
+    background-color: linear-gradient(to bottom, #f8fafc, #f1f5f9);
     color: #1e293b;
 }
 
@@ -31,7 +31,7 @@ header {
 }
 
 .main-image img {
-    max-width: 600px;
+    max-width: 700px;
     height: auto;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 6px;
@@ -60,30 +60,63 @@ header {
 }
 
 .main-centered {
-    max-width: 800px;
+    max-width: 1000px;
     margin: 0 auto;
-    padding: 32px;
+    padding: 48px 24px;
     text-align: center;
 }
 
+.main-centered h2 {
+    font-size: 28px;
+    margin-bottom: 32px;
+    font-weight: 600;
+    color: #1e293b;
+}
+
 .chart-block {
-    margin-bottom: 48px;
+    margin-bottom: 64px;
 }
 
 .chart-block img {
     width: 100%;
-    max-width: 600px;
+    max-width: 1000px;
     height: auto;
     border-radius: 6px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .chart-block h3 {
-    color: #dc2626; /* красный — республиканцы */
+    font-size: 1.25rem;
+    font-weight: 600;
     margin-bottom: 12px;
+    text-align: center;
+}
+
+.pres-title {
+    color: #dc2626; /* rot — Präsidentenwahl */
+    font-weight: 500;
+    margin-bottom: 16px;
+}
+
+.senate-title {
+    color: #1d4ed8; /* blau — Senatswahl */
+    font-weight: 500;
+    margin-bottom: 16px;
 }
 
 p {
     font-size: 16px;
     color: #334155;
+}
+
+a {
+    transition: color 0.2s ease-in-out;
+}
+.sidebar a:hover {
+    color: #0c4a6e;
+}
+
+.chart-block a:hover img {
+    box-shadow: 0 0 12px rgba(100, 116, 139, 0.3);
+    transition: box-shadow 0.2s ease;
 }
