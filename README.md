@@ -1,18 +1,19 @@
-# 📊 Election Monitor API – US-Wahlen 2024
+# 📊 Election Monitor API – US-Wahlen 2024  
+**FastAPI-based site with static visualizations for U.S. Election Predictions**
 
-A lightweight **FastAPI** application for exploring prediction market data from the **2024 U.S. Presidential and Senate elections**, with focus on key swing states.  
-Data is visualized as state-level timelines and a week-by-week heatmap.
+Eine leichtgewichtige **FastAPI-Anwendung** zur Darstellung von Prognosedaten aus Vorhersagemärkten zur **US-Präsidentschafts- und Senatswahl 2024**, mit Fokus auf zentrale „Swing States“.  
+Die Daten werden als Zeitreihen auf Bundesstaatenebene und als Heatmap nach Kalenderwochen visualisiert.
 
 ---
 
-## 🔎 What This Is
+## 🔎 Was ist das?
 
-This MVP was built as a public-facing demo based on data components from a confidential project at [DryShaft Data Lab](https://dryshaft.net).  
-The original system aggregated data from **Polymarket**, media sources, and NLP pipelines into a multi-screen monitoring dashboard for trading and analytics teams.  
-This stripped-down version includes only cleaned prediction market data and public-facing graphs.
+Dieses MVP wurde als öffentlich zugängliches Demoprojekt entwickelt und basiert auf Datenmodulen eines vertraulichen Projekts bei [DryShaft Data Lab](https://dryshaft.net).  
+Das ursprüngliche System aggregierte Informationen aus **Polymarket**, Medienquellen und NLP-Pipelines in einem Multi-Screen-Dashboard zur Echtzeit-Überwachung für Analyse- und Trading-Teams.  
+Die hier gezeigte reduzierte Version enthält ausschließlich bereinigte Prognosedaten und öffentlich darstellbare Grafiken.
 
-🔗 For more background, see the [project description](https://pythia.one/us_wahl_2024.html)  
-🌐 **Live demo:** [https://election-monitor.up.railway.app](https://election-monitor.up.railway.app)
+🔗 Weitere Hintergründe: [Projektbeschreibung](https://pythia.one/us_wahl_2024.html)  
+🌐 **Live-Demo:** [https://election-monitor.up.railway.app](https://election-monitor.up.railway.app)
 
 ---
 
@@ -34,8 +35,8 @@ Die Abhängigkeiten von Alembic, SQLAlchemy und asyncpg sind noch vorhanden, wer
 ```
 core-utils/
 ├── app/
-│   ├── main.py              # FastAPI entrypoint
-│   ├── db/                  # DB models and engine
+│   ├── main.py              # FastAPI-Einstiegspunkt
+│   ├── db/                  # Datenbankmodelle und Engine (nicht aktiv)
 │   ├── templates/           # Jinja2 HTML pages
 │   └── static/              # Style and chart images
 │		└──engine.py 		
@@ -105,14 +106,14 @@ PYTHONPATH=. python ingest/generate_all_charts.py
 
 ---
 
-## ⚠️ Legal / Notes
+## ⚠️ Rechtlicher Hinweis
 
-- The original project is partly covered by an NDA.  
-- This repo includes **no confidential code or analysis**.  
-- Data was sourced from public market interfaces (Polymarket etc.).  
-- Charts are static PNGs generated from anonymized state-level data.
+- Das ursprüngliche Projekt unterliegt teilweise einer **Geheimhaltungsvereinbarung (NDA)**.  
+- Dieses Repository enthält **keinen vertraulichen Code oder Analysen**.  
+- Die verwendeten Daten stammen ausschließlich aus öffentlich zugänglichen Vorhersagemärkten (z. B. Polymarket).  
+- Alle Diagramme wurden auf Basis **anonymisierter und bereinigter State-Level-Daten** als PNG-Dateien generiert.
 
 ---
 
-🗂️ All credentials are managed via `.env`  
-🚫 Do **not** commit `.env`, `.DS_Store`, or `alembic.ini`
+🗂️ Alle Zugangsdaten und Konfigurationswerte werden über `.env` verwaltet.  
+🚫 Dateien wie `.env`, `.DS_Store` oder `alembic.ini` sollten **nicht** eingecheckt werden.
